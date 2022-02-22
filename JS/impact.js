@@ -27,10 +27,8 @@ function fetchTable(checkDate) {
     .then((response) => response.json())
     .then((data) => (myData = data))
     .then(function () {
-      console.log(myData);
-      console.log(myData.element_count);
-
       createTables(table, headerArr, myData.near_earth_objects[checkDate]);
+      newData = myData.near_earth_objects[checkDate];
     });
 }
 //call fetchTable
@@ -58,7 +56,7 @@ dropDown.addEventListener("change", listening);
 function listening() {
   console.log(dropDown.value);
 
-  filterData();
+  filterData("dropDown.value == 4", "checkSize(js)", "dropDown.value");
   rebuildtables(newData);
 }
 //end of dropdown menu neo size
@@ -91,29 +89,26 @@ let earthImpact = document.getElementById("earthImpact");
 
 earthImpact.addEventListener("click", listen);
 function listen() {
-  filterData();
+  filterData(
+    "earthImpact.checked",
+    "js.is_potentially_hazardous_asteroid",
+    "earthImpact.checked"
+  );
 }
 //end of check if box is selected
 
 //Filter data
 
-function filterData() {
-  newData = myData.near_earth_objects[checkDate].filter(function (js) {
-    if (earthImpact.checked == false) {
+function filterData(skipFilter, compare1, compare2) {
+  newData2 = newData.filter(function (js) {
+    console.log(js);
+    console.log(eval(skipFilter));
+    if (eval(skipFilter) == false) {
       return (
         js.is_potentially_hazardous_asteroid ==
         js.is_potentially_hazardous_asteroid
       );
-    } else return js.is_potentially_hazardous_asteroid == earthImpact.checked;
-  });
-
-  newData2 = newData.filter(function (js, i) {
-    if (dropDown.value == 4) {
-      return (
-        js.is_potentially_hazardous_asteroid ==
-        js.is_potentially_hazardous_asteroid
-      );
-    } else return checkSize(js) == dropDown.value;
+    } else return eval(compare1) == eval(compare2);
   });
   newData = newData2;
   rebuildtables(newData);
