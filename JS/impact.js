@@ -1,24 +1,16 @@
 let checkDate = "2017-09-01";
-let defaulthead = `<tr>
-<th>Name of Asteroid</th>
-<th>Size</th>
-<th>Potential to hit earth</th>
-</tr>`;
 let newData;
-
 let headerArr = ["name", "size", "danger of impact"];
 let table = document.getElementById("neosys");
 let passDate = document.getElementById("passDate");
+let pass2ndDate = document.getElementById("pass2ndDate");
+let myButton = document.getElementById("myButton");
 
-console.log(passDate.value);
 
 let sizes = [0.02, 0.2, 0.5, 1];
-console.log(sizes[0]);
-let myButton = document.getElementById("myButton");
+
 let myData;
 
-let f1Switch = "";
-let f2Switch = "";
 
 function fetchTable(checkDate) {
   fetch(
@@ -29,6 +21,7 @@ function fetchTable(checkDate) {
     .then(function () {
       createTables(table, headerArr, myData.near_earth_objects[checkDate]);
       console.log(myData.near_earth_objects[checkDate]);
+      console.log(checkDate);
     });
 }
 //call fetchTable
@@ -41,9 +34,13 @@ function lessListen() {
   if (myButton.innerText === "show more") {
     myButton.innerText = "show less";
     table.style.visibility = "";
+    filterData();
   } else {
     myButton.innerText = "show more";
     table.style.visibility = "hidden";
+    table.innerHTML = ""
+    
+    
   }
 }
 //end of show more and show less button
@@ -87,19 +84,19 @@ function listening() {
   console.log(dropDown.value);
 
   filterData();
-  rebuildtables(newData);
+  
 }
 //end of dropdown menu neo size
 
 //Filter data
 
-function filterData(skipFilter, compare1, compare2) {
+function filterData() {
   newData = myData.near_earth_objects[checkDate].filter(function (js) {
     return (
       (dropDown.value == 4 || checkSize(js) == dropDown.value) &&
       (earthImpact.checked == false ||
         js.is_potentially_hazardous_asteroid == earthImpact.checked) &&
-      (magnitude.checked == false || js.absolute_magnitude_h <= 20) &&
+      (magnitude.checked == false || js.absolute_magnitude_h < 20) &&
       (sentry.checked == false || js.is_sentry_object == sentry.checked)
     );
   });
@@ -110,7 +107,7 @@ function filterData(skipFilter, compare1, compare2) {
 
 //reset tables and put new tables
 function rebuildtables(newData) {
-  table.innerHTML = defaulthead;
+  table.innerHTML = "";
   createTables(table, headerArr, newData);
 }
 
@@ -121,12 +118,17 @@ function createTables(table, headerArr, data) {
   for (let h = 0; h < data.length; h++) {
     let tr = document.createElement("tr");
     table.appendChild(tr);
+    tr.insertAdjacentHTML("afterbegin", `<th scope="row">${h + 1}</th>`);
 
-    for (let i = 0; i < headerArr.length; i++) {
+    for (let i = 0; i < 4; i++) {
+      let yesNo
+      if (data[h].is_potentially_hazardous_asteroid == true) {yesNo = 'Yes'}else {yesNo = 'No'}
       let neoArr = [
         data[h].name,
         data[h].estimated_diameter.kilometers.estimated_diameter_max,
-        data[h].is_potentially_hazardous_asteroid,
+        yesNo,
+        data[h].absolute_magnitude_h,
+        
       ];
       let td = document.createElement("td");
       tr.appendChild(td);
@@ -141,12 +143,13 @@ function createTables(table, headerArr, data) {
 passDate.addEventListener("change", dateListen);
 
 function dateListen() {
-  table.innerHTML = defaulthead;
+  table.innerHTML = "";
   fetchTable(passDate.value);
   checkDate = passDate.value;
 }
 
 //end of set search time
+
 //check neo size
 
 function checkSize(newData) {

@@ -16,66 +16,7 @@
   <body>
     <main>
       <!-- pretty navbar  -->
-      <nav class="navbar navbar-dark bg-dark" aria-label="First navbar example">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Near earth object warning system</a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarsExample01"
-            aria-controls="navbarsExample01"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarsExample01">
-            <ul class="navbar-nav me-auto mb-2">
-              <li class="nav-item">
-                <a
-                  class="nav-link active"
-                  aria-current="page"
-                  href="../index.html"
-                  >Home</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled">Disabled</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="dropdown01"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  >Dropdown</a
-                >
-                <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <form>
-              <input
-                class="form-control"
-                type="text"
-                placeholder="Search"
-                aria-label="Search"
-              />
-            </form>
-          </div>
-        </div>
-      </nav>
+      <div id="navbar"></div>
       <!-- end of pretty navbar -->
 
       <!-- little grid trial -->
@@ -123,15 +64,21 @@
               name="closestDate"
             />
           </div>
+          <div class="col" id="pass2ndDate"></div>
         </div>
       </div>
     </main>
-    <table id="neosys">
-      <tr>
-        <th>Name of Asteroid</th>
-        <th>Size</th>
-        <th>Potential to hit earth</th>
-      </tr>
+    <table class="table table-striped table-bordered table-responsive">
+      <thead class="thead-dark">
+        <tr>
+          <th style="width: 5%" scope="col">Position</th>
+          <th style="width: 15%" scope="col">Name of NEO</th>
+          <th style="width: 15%" scope="col">Size in KM</th>
+          <th style="width: 15%" scope="col">Potentially hits earth</th>
+          <th style="width: 10%" scope="col">Magnitude</th>
+        </tr>
+      </thead>
+      <tbody id="neosys"></tbody>
     </table>
 
     <script
@@ -139,6 +86,7 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
+    <script src="../JS/navbar.js"></script>
     <script src="../JS/impact.js"></script>
   </body>
 </html>
