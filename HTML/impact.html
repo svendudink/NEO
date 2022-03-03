@@ -23,11 +23,9 @@
       <div class="container">
         <div class="row">
           <div class="col">
-            <button id="myButton">show less</button>
+            <button class="btn btn-primary" id="myButton">show less</button>
           </div>
-          <div class="col">
-            <button id="myButton"></button>
-          </div>
+        
           <div class="col">
             <label for="disaster-type">NEO size:</label>
             <select name="disaster-type" id="disaster">
@@ -80,7 +78,18 @@
       </thead>
       <tbody id="neosys"></tbody>
     </table>
-<p1 id="saveItems" style="visibility: hidden;">Save your search<button  id="myGoogleButton">Save</button>view your last saved search<button id="myLoadButton">View</button></p1>
+
+    
+
+
+
+<div id="saveItems" class="container" style="visibility: hidden;"><div class="row">
+<div class="col"><p1  ><button class="btn btn-primary" id="myGoogleButton">Save your Search</button></div>
+  
+<div class="col"><button class="btn btn-primary" id="myLoadButton">View your last saved search</button></p1></div></div>
+
+
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

@@ -73,14 +73,7 @@ function navigationInsert() {
          </ul>
        </li>
      </ul>
-     <form>
-       <input
-         class="form-control"
-         type="text"
-         placeholder="Search"
-         aria-label="Search"
-       />
-     </form>
+     
    </div>
  </div>
  </nav>`
@@ -133,7 +126,8 @@ function passwordLogin(e) {
 
   if (mostSecurePasswordSystem(userName.value, password.value)) {
     setActiveUser(userName.value);
-    window.location.href = "./Admin.html#";
+
+    window.location.href = "http://127.0.0.1:5500/HTML/Admin.html";
     console.log(auSU);
   } else {
     passRight = "your password is wrong";

@@ -13,10 +13,12 @@ let userExist = document.getElementById("userExist");
 let unfilledFields = document.getElementById("unfilledFields");
 let searchUserField = document.getElementById("searchUserField");
 let searchUserButton = document.getElementById("searchUserButton");
-
+let generate = document.getElementById("generate");
 newCreateUser.addEventListener("click", createAndPushUser);
+console.log(localStorage["NEOWARNAU"]);
+//generate headtext admin field
 
-// end of creates user and push to local storage
+//end of generate headtext admin field
 
 // view registered users
 buildRegisteredUsers();
@@ -107,19 +109,39 @@ function delListen(e) {
   localStorage["NEOWARN"] = localData;
 }
 
+console.log(localStorage["NEOWARNAU"]);
+console.log(user.isSuperAdmin == true);
 // end of delete users
 
-//Show and Hide
 showHide();
 function showHide() {
   user.forEach((element) => {
     if (
       element.userName == localStorage["NEOWARNAU"] &&
       element.isSuperAdmin == true
-    )
+    ) {
       document.getElementById("hideFields").style.visibility = "visible";
+      generate.innerHTML = "Welcome Super Admin";
+    }
   });
 }
+// // //Show and Hide
+// showHide();
+// function showHide() {
+//   for (let i = 0; i < user.length; i++) {
+//     if (
+//       user.userName == localStorage["NEOWARNAU"] &&
+//       user.isSuperAdmin == true
+//     ) {
+//       document.getElementById("hideFields").style.visibility = "visible";
+//       break;
+//     } else {
+//       document.getElementById("hideFields").style.visibility = "hidden";
+//     }
+//   }
+// }
+
+//end of show and hide
 
 // check for double username
 function doubleUserName(checkUser) {
