@@ -39,6 +39,14 @@ function navigationInsert() {
        <li class="nav-item">
          <a class="nav-link" href="../HTML/impact.html">NEO Navigation</a>
        </li>
+       <li class="nav-item">
+         <a
+           class="nav-link"
+           aria-current="page"
+           id="googleLogin"
+           >Login with google</a
+         >
+       </li>
 
        <li class="nav-item dropdown">
          <a

@@ -16,6 +16,22 @@ let searchUserButton = document.getElementById("searchUserButton");
 
 newCreateUser.addEventListener("click", createAndPushUser);
 
+// end of creates user and push to local storage
+
+// view registered users
+buildRegisteredUsers();
+function buildRegisteredUsers(filtered) {
+  console.log(pushToUserHTML);
+
+  let userNew = user.filter((element, index) => {
+    console.log(filtered == element.userName);
+    return (
+      filtered == undefined || filtered == element.userName || filtered == ""
+    );
+  });
+  buildTables(userNew);
+}
+
 // Creates the user, and pushes to local storage
 function createAndPushUser(e) {
   e.preventDefault();
@@ -55,15 +71,12 @@ function createAndPushUser(e) {
   }
 }
 
-// end of creates user and push to local storage
+// end of view registered users
 
-// view registered users
-buildRegisteredUsers();
-function buildRegisteredUsers(filtered) {
+// Build and rebuild tables
+function buildTables(table) {
   pushToUserHTML.innerHTML = "";
-  console.log(pushToUserHTML);
-
-  user.filter((element, index) => {
+  table.forEach((element, index) => {
     let SU = "No";
     if (element.isSuperAdmin == true) SU = "Yes";
     pushToUserHTML.insertAdjacentHTML(
@@ -73,12 +86,10 @@ function buildRegisteredUsers(filtered) {
             <span></span>
             </label></td><td>${element.userName}</td><td>${element.firstName} ${element.surname}</td><td>${SU}</td></tr>`
     );
-    console.log(filtered == element.userName);
-    return filtered == element.userName;
   });
 }
 
-// end of view registered users
+// end of build and rebuild tables
 
 // delete users
 deleteUser.addEventListener("click", delListen);

@@ -19,6 +19,7 @@ let addDays = 7;
 let datePlus7;
 let arrayOfObject = [];
 passDate.value = tdDate;
+let saveItems = document.getElementById("saveItems");
 
 build2nd();
 
@@ -243,3 +244,5 @@ function unpack() {
     arrayOfObject.push(...myData.near_earth_objects[property]);
   }
 }
+
+saveItems.addEventListener("click", itemGoogle);
