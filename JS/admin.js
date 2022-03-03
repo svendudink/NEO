@@ -14,11 +14,8 @@ let unfilledFields = document.getElementById("unfilledFields");
 let searchUserField = document.getElementById("searchUserField");
 let searchUserButton = document.getElementById("searchUserButton");
 let generate = document.getElementById("generate");
+let liftprivilege = document.getElementById("liftprivilege");
 newCreateUser.addEventListener("click", createAndPushUser);
-console.log(localStorage["NEOWARNAU"]);
-//generate headtext admin field
-
-//end of generate headtext admin field
 
 // view registered users
 buildRegisteredUsers();
@@ -112,7 +109,7 @@ function delListen(e) {
 console.log(localStorage["NEOWARNAU"]);
 console.log(user.isSuperAdmin == true);
 // end of delete users
-
+// // //Show and Hide
 showHide();
 function showHide() {
   user.forEach((element) => {
@@ -125,21 +122,6 @@ function showHide() {
     }
   });
 }
-// // //Show and Hide
-// showHide();
-// function showHide() {
-//   for (let i = 0; i < user.length; i++) {
-//     if (
-//       user.userName == localStorage["NEOWARNAU"] &&
-//       user.isSuperAdmin == true
-//     ) {
-//       document.getElementById("hideFields").style.visibility = "visible";
-//       break;
-//     } else {
-//       document.getElementById("hideFields").style.visibility = "hidden";
-//     }
-//   }
-// }
 
 //end of show and hide
 
@@ -164,3 +146,13 @@ function searching(e) {
   console.log(searchUserField.value);
   buildRegisteredUsers(searchUserField.value);
 }
+// end of search  users
+liftprivilege.addEventListener("click", paywall);
+
+//Placeholder
+function paywall() {
+  alert(
+    "This is a premium function, if you wish this to be enabled, send 4 bottles of Gin, 2 bags of potatoe chips and maybe some tonicwater to Code Academy Berlin  "
+  );
+}
+// end fo placeholder

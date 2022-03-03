@@ -42,8 +42,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js";
 
 googleLogin.addEventListener("click", googleClick);
-// Signs-out of Friendly Chat.
-// Signs-in Friendly Chat.
+
 async function signIn() {
   // Sign in Firebase using popup auth and Google as the identity provider.
   let provider = new GoogleAuthProvider();
@@ -58,7 +57,6 @@ function googleClick() {
   }
 }
 
-// Signs-out of Friendly Chat.
 function signOutUser() {
   // Sign out of Firebase.
   signOut(getAuth());
