@@ -1,6 +1,13 @@
 let navbar = document.getElementById("navbar");
 let passRight = "";
 
+//Set active user
+function setActiveUser(auSU) {
+  localStorage["NEOWARNAU"] = auSU;
+}
+
+//end of set active user
+
 navigationInsert();
 
 function navigationInsert() {
@@ -120,13 +127,14 @@ function navigationInsert() {
   let loginBtn = document.getElementById("loginBtn");
   loginBtn.addEventListener("click", passwordLogin);
 }
-
+let hideFields = document.getElementById("hideFields");
 function passwordLogin(e) {
   e.preventDefault();
 
   if (mostSecurePasswordSystem(userName.value, password.value)) {
     setActiveUser(userName.value);
-    window.location.href = "http://127.0.0.1:5500/HTML/Admin.html#";
+    window.location.href = "./Admin.html#";
+    console.log(auSU);
   } else {
     passRight = "your password is wrong";
     navigationInsert();
@@ -148,10 +156,3 @@ function mostSecurePasswordSystem(nameField, passField) {
     return true;
   } else return false;
 }
-
-//Set active user
-function setActiveUser(auSU) {
-  localStorage["NEOWARNAU"] = auSU;
-}
-
-//end of set active user

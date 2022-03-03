@@ -1,4 +1,11 @@
 let saveItems = document.getElementById("saveItems");
+let myGoogleButton = document.getElementById("myGoogleButton");
+let neosys = document.getElementById("neosys");
+let NeoUserFields;
+let myLoadButton = document.getElementById("myLoadButton");
+let userName;
+let userData;
+let time;
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
@@ -20,13 +27,19 @@ import {
   signOut,
 } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js";
 
-export {
-  getAuth,
-  onAuthStateChanged,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
-};
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  limit,
+  onSnapshot,
+  setDoc,
+  updateDoc,
+  doc,
+  serverTimestamp,
+} from "https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js";
 
 googleLogin.addEventListener("click", googleClick);
 // Signs-out of Friendly Chat.
@@ -68,8 +81,10 @@ function isUserSignedIn() {
 function authStateObserver() {
   if (isUserSignedIn() == true) {
     googleLogin.innerHTML = `Welcome ${getUserName()}. Click her to Log out`;
+    saveItems.style.visibility = "visible";
   } else {
     googleLogin.innerHTML = "Login with google";
+    saveItems.style.visibility = "hidden";
   }
 }
 
@@ -80,10 +95,49 @@ async function SaveThoseNEOS(fields) {
     await addDoc(collection(getFirestore(), "NeoUserFields"), {
       name: getUserName(),
       text: fields,
-      profilePicUrl: getProfilePicUrl(),
       timestamp: serverTimestamp(),
     });
   } catch (error) {
     console.error("Error writing new message to Firebase Database", error);
   }
 }
+
+myGoogleButton.addEventListener("click", googleSave);
+
+function googleSave() {
+  let temp = JSON.stringify(neosys.innerHTML);
+  SaveThoseNEOS(temp);
+}
+loadNeos();
+// Loads chat messages history and listens for upcoming ones.
+function loadNeos() {
+  // Create the query to load the last 12 messages and listen for new ones.
+  const recentMessagesQuery = query(
+    collection(getFirestore(), "NeoUserFields"),
+    orderBy("timestamp", "desc"),
+    limit(2)
+  );
+  // Start listening to the query.
+  onSnapshot(recentMessagesQuery, function (snapshot) {
+    userName =
+      snapshot._snapshot.docChanges[0].doc.data.value.mapValue.fields.name;
+    userData = JSON.parse(
+      snapshot._snapshot.docChanges[0].doc.data.value.mapValue.fields.text
+        .stringValue
+    );
+    time =
+      snapshot._snapshot.docChanges[0].doc.data.value.mapValue.fields.timestamp;
+  });
+}
+
+myLoadButton.addEventListener("click", listenneo);
+
+function listenneo() {
+  neosys.innerHTML = userData;
+}
+
+//show hide view last saved search button
+function showAndHide() {
+  if (userdata == "undefined") console.log("letmed");
+}
+//end of show hide view last saved search button

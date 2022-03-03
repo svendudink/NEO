@@ -244,5 +244,3 @@ function unpack() {
     arrayOfObject.push(...myData.near_earth_objects[property]);
   }
 }
-
-saveItems.addEventListener("click", itemGoogle);
